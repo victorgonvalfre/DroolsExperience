@@ -1,0 +1,30 @@
+package br.edu.sr.ifes.mpn.model;
+
+import br.edu.sr.ifes.mpn.model.*;
+
+// Regra para pegar possiveis doadores
+rule "EncontrarNotificaoPossivelDoador"
+	when 
+	 	$n: Notificacao(possuiDoencaPerigosa == false, entrevista == null)
+	then
+	 	System.out.println ("Existe um possivel doador: " + $n.getNome());
+end
+// Regra para pegar possiveis nao doadores
+rule "EncontrarNotificaoPossivelNaoDoador"
+	when 
+	 	$n: Notificacao(possuiDoencaPerigosa == true, entrevista == null)
+	then
+	 	System.out.println ("Existe um possivel nao doador: " + $n.getNome());
+	    //Retirando da lista de fatos 
+	 	retract($n)
+end
+
+// Regra para pegar possiveis doadores
+rule "EncontrarNotificaoPossivelDoadorEntrevista"
+	when 
+	 	$n: Notificacao(possuiDoencaPerigosa == false, entrevista != null, $e: entrevista)
+	 	$e1: Entrevista(this ==$e, doacaoAprovada == true)
+	 	
+	then
+	 	System.out.println ("--->Existe um doador: " + $n.getNome());
+end

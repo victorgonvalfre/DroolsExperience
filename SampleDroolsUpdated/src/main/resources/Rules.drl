@@ -1,0 +1,71 @@
+package br.edu.sr.ifes.mpn.model;
+
+import br.edu.sr.ifes.mpn.model.*;
+
+rule "PacienteNaoDoador"
+	when 
+	 	$n: Notificacao($o: Obito)
+	 	$o1: Obito(this == $o, $c: CausaMortis)
+	 	$c1: CausaMortis(this == $c, tipoMorte == TipoMorte.DoencaContagiosa)
+	 	
+	then
+	 	System.out.println ("---> Paciente com Restrição médica! notificação de codigo: "+ $n.getCodigo()+ "não pode ser tratada como possivel doador!"); 
+	 	retract($n)
+end
+rule "PossivelPacienteDoador"
+	when 
+	 	$n: Notificacao($o: Obito)
+	 	$o2: Obito(this == $o, $c: CausaMortis)
+	 	$c2: CausaMortis(this == $c, tipoMorte == TipoMorte.Outros)
+	 	
+	then
+	 	System.out.println ("---> Notificação de codigo: "+ $n.getCodigo()+ "agendar entrevista, possivel doador!"); 
+	 	Doacao doacao = new Doacao()
+	 	insert(doacao)
+	 	
+end
+rule "DoacaoNegada"
+	when 
+	 	$d: Doacao(autorizado == false)
+	then
+	 	System.out.println ("---> Doação Negada! "+ $d.getMotivoRecusa());
+	 	retract($d) 
+end
+rule "DoacaoAceita"
+	when 
+	 	$d: Doacao(autorizado == true)
+	then
+	 	System.out.println ("---> Doação Aceita! Avisar Banco de olhos! ");
+	 	Captacao captacao = new Captacao();
+	 	insert(captacao) 
+end
+rule "Obito em Vitoria"
+	when 
+	 	$c: Captacao($d: Doacao)
+	 	$d1: Doacao(this == $d, $o : Obito)
+	 	$o1: Obito(this == $o, localMorte == Vitoria) 
+	then
+	 	System.out.println ("---> Banco de Olhos Jayme! ");
+	 	$c.setRealizada(true)
+	 	update($c)
+	 	Instituicao instituicao = new Instituicao();
+	 	instituicao.setNome("Jayme")
+	 	insert(instituicao) 
+end
+rule "Obito em Outros"
+	when 
+	 	$c: Captacao($d: Doacao)
+	 	$d1: Doacao(this == $d, $o : Obito)
+	 	$o1: Obito(this == $o, localMorte == Outros) 
+	then
+	 	System.out.println ("---> Banco de Olhos Evangelio! ");
+	 	$c.setRealizada(true)
+	 	update($c)
+	 	Instituicao instituicao = new Instituicao();
+	 	instituicao.setNome("Evangelio")
+	 	insert(instituicao) 
+end
+rule "tempoCaptacao"
+	when 
+	then 
+end
