@@ -20,8 +20,6 @@ rule "PossivelPacienteDoador"
 	 	
 	then
 	 	System.out.println ("---> Notificação de codigo: "+ $n.getCodigo()+ "agendar entrevista, possivel doador!"); 
-	 	Doacao doacao = new Doacao()
-	 	insert(doacao)
 	 	
 end
 rule "DoacaoNegada"
@@ -37,35 +35,33 @@ rule "DoacaoAceita"
 	then
 	 	System.out.println ("---> Doação Aceita! Avisar Banco de olhos! ");
 	 	Captacao captacao = new Captacao();
-	 	insert(captacao) 
+	 	insert(captacao); 
 end
 rule "Obito em Vitoria"
 	when 
 	 	$c: Captacao($d: Doacao)
 	 	$d1: Doacao(this == $d, $o : Obito)
-	 	$o1: Obito(this == $o, localMorte == Vitoria) 
+	 	$o1: Obito(this == $o, localMorte == LocalMorte.Vitoria) 
 	then
 	 	System.out.println ("---> Banco de Olhos Jayme! ");
-	 	$c.setRealizada(true)
-	 	update($c)
+	 	$c.setRealizada(true);
+	 	update($c);
+	 	retract($c);
 	 	Instituicao instituicao = new Instituicao();
-	 	instituicao.setNome("Jayme")
-	 	insert(instituicao) 
+	 	instituicao.setNome("Jayme");
+	 	insert(instituicao); 
 end
 rule "Obito em Outros"
 	when 
 	 	$c: Captacao($d: Doacao)
 	 	$d1: Doacao(this == $d, $o : Obito)
-	 	$o1: Obito(this == $o, localMorte == Outros) 
+	 	$o1: Obito(this == $o, localMorte == LocalMorte.Outros) 
 	then
 	 	System.out.println ("---> Banco de Olhos Evangelio! ");
-	 	$c.setRealizada(true)
-	 	update($c)
+	 	$c.setRealizada(true);
+	 	update($c);
+	 	retract($c);
 	 	Instituicao instituicao = new Instituicao();
-	 	instituicao.setNome("Evangelio")
-	 	insert(instituicao) 
-end
-rule "tempoCaptacao"
-	when 
-	then 
+	 	instituicao.setNome("Evangelio");
+	 	insert(instituicao) ;
 end

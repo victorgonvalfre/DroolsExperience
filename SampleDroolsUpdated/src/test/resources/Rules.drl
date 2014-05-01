@@ -2,29 +2,72 @@ package br.edu.sr.ifes.mpn.model;
 
 import br.edu.sr.ifes.mpn.model.*;
 
-// Regra para pegar possiveis doadores
-rule "EncontrarNotificaoPossivelDoador"
+rule "PacienteNaoDoador"
 	when 
-	 	$n: Notificacao(possuiDoencaPerigosa == false, entrevista == null)
-	then
-	 	System.out.println ("Existe um possivel doador: " + $n.getNome());
-end
-// Regra para pegar possiveis nao doadores
-rule "EncontrarNotificaoPossivelNaoDoador"
-	when 
-	 	$n: Notificacao(possuiDoencaPerigosa == true, entrevista == null)
-	then
-	 	System.out.println ("Existe um possivel nao doador: " + $n.getNome());
-	    //Retirando da lista de fatos 
-	 	retract($n)
-end
-
-// Regra para pegar possiveis doadores
-rule "EncontrarNotificaoPossivelDoadorEntrevista"
-	when 
-	 	$n: Notificacao(possuiDoencaPerigosa == false, entrevista != null, $e: entrevista)
-	 	$e1: Entrevista(this ==$e, doacaoAprovada == true)
+	 	$n: Notificacao($o: Obito)
+	 	$o1: Obito(this == $o, $c: CausaMortis)
+	 	$c1: CausaMortis(this == $c, tipoMorte == TipoMorte.DoencaContagiosa)
 	 	
 	then
-	 	System.out.println ("--->Existe um doador: " + $n.getNome());
+	 	System.out.println ("---> Paciente com Restrição médica! notificação de codigo: "+ $n.getCodigo()+ " não pode ser tratada como possivel doador!"); 
+	 	retract($n)
+end
+rule "PossivelPacienteDoador"
+	when 
+	 	$n: Notificacao($o: Obito)
+	 	$o2: Obito(this == $o, $c: CausaMortis)
+	 	$c2: CausaMortis(this == $c, tipoMorte == TipoMorte.Outros)
+	 	
+	then
+	 	System.out.println ("---> Notificação de codigo: "+ $n.getCodigo()+ " agendar entrevista, possivel doador!"); 
+	 	
+end
+rule "DoacaoNegada"
+	when 
+		$n: Notificacao($o: Obito)
+	 	$o2: Obito(this == $o, $c: CausaMortis)
+	 	$c2: CausaMortis(this == $c, tipoMorte == TipoMorte.Outros)
+	 	$d: Doacao(autorizado == false)
+	then
+	 	System.out.println ("---> Doação Negada! "+ $d.getMotivoRecusa());
+	 	retract($d) 
+end
+rule "DoacaoAceita"
+	when
+		$n: Notificacao($o: Obito)
+	 	$o2: Obito(this == $o, $c: CausaMortis)
+	 	$c2: CausaMortis(this == $c, tipoMorte == TipoMorte.Outros) 
+	 	$d: Doacao(autorizado == true)
+	then
+	 	System.out.println ("---> Doação Aceita! Avisar Banco de olhos! ");
+	 	Captacao captacao = new Captacao();
+	 	insert(captacao); 
+end
+rule "Obito em Vitoria"
+	when 
+	 	$c: Captacao($d: Doacao)
+	 	$d1: Doacao(this == $d, $o : Obito)
+	 	$o1: Obito(this == $o, localMorte == LocalMorte.Vitoria) 
+	then
+	 	System.out.println ("---> Banco de Olhos Jayme! ");
+	 	$c.setRealizada(true);
+	 	update($c);
+	 	retract($c);
+	 	Instituicao instituicao = new Instituicao();
+	 	instituicao.setNome("Jayme");
+	 	insert(instituicao); 
+end
+rule "Obito em Outros"
+	when 
+	 	$c: Captacao($d: Doacao)
+	 	$d1: Doacao(this == $d, $o : Obito)
+	 	$o1: Obito(this == $o, localMorte == LocalMorte.Outros) 
+	then
+	 	System.out.println ("---> Banco de Olhos Evangelio! ");
+	 	$c.setRealizada(true);
+	 	update($c);
+	 	retract($c);
+	 	Instituicao instituicao = new Instituicao();
+	 	instituicao.setNome("Evangelio");
+	 	insert(instituicao) ;
 end

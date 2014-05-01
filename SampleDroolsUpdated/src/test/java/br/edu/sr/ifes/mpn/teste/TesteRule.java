@@ -21,6 +21,9 @@ public class TesteRule {
 		ruleEngine.config("Rules.drl");
 	}
 	
+	/*
+	 * 
+	 
 	@Test
 	public void testePacienteNaoDoador()
 	{
@@ -82,6 +85,8 @@ public class TesteRule {
 		//Liberar a sessao
 		ruleEngine.dispose();
 	}
+
+	
 	
 	@Test
 	public void testeDoacaoNegada()
@@ -119,7 +124,9 @@ public class TesteRule {
 		//Liberar a sessao
 		ruleEngine.dispose();
 	}
+ 
 
+   
 	@Test
 	public void testeDoacaoAceita()
 	{
@@ -156,12 +163,17 @@ public class TesteRule {
 		//Liberar a sessao
 		ruleEngine.dispose();
 	}
+	*/
 	
+	/*
+	 * 
+	 
 	@Test
 	public void testeColetaEmVitoria()
 	{
        	Calendar cal = Calendar.getInstance();
     	
+
     	//Criando CausaMortis
     	CausaMortis causaMortis = new CausaMortis();
     	causaMortis.setTipoMorte(TipoMorte.Outros);
@@ -182,19 +194,27 @@ public class TesteRule {
         //Criando Doacao
         Doacao doacao = new Doacao();
         doacao.setAutorizado(true);
+        doacao.setObito(obito);
         doacao.setMotivoRecusa(null);
+        
+        //Criando Captacao
+        Captacao captacao = new Captacao();
+        captacao.setDoacao(doacao);
+        
         
 		//Adiciono a objeto na sessao
 		ruleEngine.addObject(causaMortis);
 		ruleEngine.addObject(obito);
 		ruleEngine.addObject(notificaco);
 		ruleEngine.addObject(doacao);
+		ruleEngine.addObject(captacao);
 		//Disparar as regras
 		ruleEngine.FireRules();
 		//Liberar a sessao
 		ruleEngine.dispose();
 	}
-
+	
+	*/
 	@Test
 	public void testeColetaEmOutros()
 	{
@@ -220,18 +240,70 @@ public class TesteRule {
         //Criando Doacao
         Doacao doacao = new Doacao();
         doacao.setAutorizado(true);
+        doacao.setObito(obito);
         doacao.setMotivoRecusa(null);
         
+        //Criando Captacao
+        Captacao captacao = new Captacao();
+        captacao.setDoacao(doacao);
+
 		//Adiciono a objeto na sessao
 		ruleEngine.addObject(causaMortis);
 		ruleEngine.addObject(obito);
 		ruleEngine.addObject(notificaco);
 		ruleEngine.addObject(doacao);
+		ruleEngine.addObject(captacao);
+		
 		//Disparar as regras
 		ruleEngine.FireRules();
 		//Liberar a sessao
 		ruleEngine.dispose();
 	}
+	
+	@Test
+	public void testeColetaEmOutrosPacienteComDoencaContagiosa()
+	{
+       	Calendar cal = Calendar.getInstance();
+    	
+    	//Criando CausaMortis
+    	CausaMortis causaMortis = new CausaMortis();
+    	causaMortis.setTipoMorte(TipoMorte.DoencaContagiosa);
+    	causaMortis.setDescricao("HIV");
+    	
+    	//Criando Obito
+    	Obito obito = new Obito();
+    	obito.setDataObito(cal.getTime());
+    	obito.setCausaMortis(causaMortis);
+    	obito.setLocalMorte(LocalMorte.Outros);
+    	
+    	//Criando Notificao
+        Notificacao notificaco = new Notificacao();
+        notificaco.setCodigo("codigo1");
+        notificaco.setDataNotificacao(cal.getTime());
+        notificaco.setObito(obito);
+		
+        //Criando Doacao
+        Doacao doacao = new Doacao();
+        doacao.setAutorizado(true);
+        doacao.setObito(obito);
+        doacao.setMotivoRecusa(null);
+        
+        //Criando Captacao
+        Captacao captacao = new Captacao();
+        captacao.setDoacao(doacao);
 
+		//Adiciono a objeto na sessao
+		ruleEngine.addObject(causaMortis);
+		ruleEngine.addObject(obito);
+		ruleEngine.addObject(notificaco);
+		ruleEngine.addObject(doacao);
+		ruleEngine.addObject(captacao);
+		
+		//Disparar as regras
+		ruleEngine.FireRules();
+		//Liberar a sessao
+		ruleEngine.dispose();
+	}
+	
 	
 }
