@@ -1,6 +1,9 @@
 package br.edu.sr.ifes.mpn.teste;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import br.edu.sr.ifes.mpn.model.*;
 import br.edu.sr.ifes.mpn.util.LocalMorte;
@@ -55,11 +58,15 @@ public class TesteRule {
 		ruleEngine.dispose();
 	}
 	
+	*/
 	@Test
 	public void testePacienteDoador()
 	{
+		
        	Calendar cal = Calendar.getInstance();
-    	
+       	Date dateAux = cal.getTime();
+       	dateAux.setHours(dateAux.getHours()+1);
+       	
     	//Criando CausaMortis
     	CausaMortis causaMortis = new CausaMortis();
     	causaMortis.setTipoMorte(TipoMorte.Outros);
@@ -68,15 +75,28 @@ public class TesteRule {
     	//Criando Obito
     	Obito obito = new Obito();
     	obito.setDataObito(cal.getTime());
+    	obito.setLocalMorte(LocalMorte.Vitoria);
     	obito.setCausaMortis(causaMortis);
     	
     	//Criando Notificao
         Notificacao notificaco = new Notificacao();
         notificaco.setCodigo("codigo2");
-        notificaco.setDataNotificacao(cal.getTime());
+        notificaco.setDataNotificacao(dateAux);
         notificaco.setObito(obito);
-		
+        
+	 	Instituicao instituicao1 = new Instituicao();
+	 	instituicao1.setNome("Jayme");
+	 	//instituicao1.setLstCaptacoesRelizadas(new ArrayList<Captacao>());
+	 	instituicao1.setSigla("vix");
+        
+	 	Instituicao instituicao2 = new Instituicao();
+	 	instituicao2.setNome("Jayme");
+	 	//instituicao2.setLstCaptacoesRelizadas(new ArrayList<Captacao>());
+	 	instituicao2.setSigla("vix");        
+        
 		//Adiciono a objeto na sessao
+	 	ruleEngine.addObject(instituicao1);
+	 	ruleEngine.addObject(instituicao2);
 		ruleEngine.addObject(causaMortis);
 		ruleEngine.addObject(obito);
 		ruleEngine.addObject(notificaco);
@@ -84,10 +104,22 @@ public class TesteRule {
 		ruleEngine.FireRules();
 		//Liberar a sessao
 		ruleEngine.dispose();
+		
+		System.out.println();
+		System.out.println("-----> Instituição 1 - Lista de Captações:");
+		for(int x = 0; x < instituicao1.getLstCaptacoesRelizadas().size(); x++){
+			System.out.println(instituicao1.getLstCaptacoesRelizadas().get(x).toString());	
+		}
+		
+		System.out.println();
+		System.out.println("-----> Instituição 2 - Lista de Captações:");
+		for(int x = 0; x < instituicao2.getLstCaptacoesRelizadas().size(); x++){
+			System.out.println(instituicao1.getLstCaptacoesRelizadas().get(x).toString());	
+		}
 	}
 
 	
-	
+	/*
 	@Test
 	public void testeDoacaoNegada()
 	{
@@ -214,7 +246,7 @@ public class TesteRule {
 		ruleEngine.dispose();
 	}
 	
-	*/
+	
 	@Test
 	public void testeColetaEmOutros()
 	{
@@ -305,5 +337,5 @@ public class TesteRule {
 		ruleEngine.dispose();
 	}
 	
-	
+	*/
 }

@@ -6,6 +6,7 @@ rule "PacienteNaoDoador"
 	when 
 	 	$n: Notificacao($o: Obito)
 	 	$o1: Obito(this == $o, $c: CausaMortis)
+	 	$n1: Notificacao(this = $n, getDelayTime() < 6)
 	 	$c1: CausaMortis(this == $c, tipoMorte == TipoMorte.DoencaContagiosa)
 	 	
 	then
