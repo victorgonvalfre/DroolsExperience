@@ -12,6 +12,23 @@ public class Doacao {
 	private Date dataEntradaDoacao;
 	private long delayTime;
 	
+	public Doacao(boolean auth, MotivoRecusa motivo, Obito obito){
+		this.autorizado = auth;
+		this.motivoRecusa = motivo;
+		this.obito = obito;
+		this.setDataEntradaDoacao();
+	}
+	
+	public Doacao(boolean auth, MotivoRecusa motivo, Obito obito, boolean tempoEstourado){
+		this.autorizado = auth;
+		this.motivoRecusa = motivo;
+		this.obito = obito;
+		if(tempoEstourado == true){
+			this.setDataEntradaDoacaoEstourado();
+		}
+		
+	}
+	
 	public long getDelayTime() {
 		
 		if(this.obito != null){
@@ -34,6 +51,14 @@ public class Doacao {
        	Calendar cal = Calendar.getInstance();
        	Date dateAux = cal.getTime();
        	dateAux.setHours(dateAux.getHours()+1);
+       	
+		this.dataEntradaDoacao = dateAux;
+	}
+	
+	public void setDataEntradaDoacaoEstourado() {
+       	Calendar cal = Calendar.getInstance();
+       	Date dateAux = cal.getTime();
+       	dateAux.setHours(dateAux.getHours()+12);
        	
 		this.dataEntradaDoacao = dateAux;
 	}

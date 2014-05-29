@@ -1,0 +1,13 @@
+package br.edu.sr.ifes.mpn.model;
+import br.edu.sr.ifes.mpn.model.*;
+
+expander PacienteNaoDoadorDoenca.dsl
+rule "PacienteNaoDoadorDoenca"
+	when 
+	 	Validar notificacao
+	 	Examinar obito
+	 	Verificar morte por doenca
+	then
+		Display msgDoenca
+		Retira Notificacao
+end

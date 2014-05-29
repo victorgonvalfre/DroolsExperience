@@ -9,6 +9,11 @@ public class Captacao {
 	private Date dataEntradaCaptacao;
 	private long delayTime;
 	
+	public Captacao(Doacao doacao){
+		this.doacao = doacao;
+		this.setDataEntradaCaptacao();
+	}
+	
 	public long getDelayTime() {
 		
 		if(this.doacao != null && this.doacao.getObito() != null){

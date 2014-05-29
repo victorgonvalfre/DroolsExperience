@@ -3,6 +3,7 @@ package br.edu.sr.ifes.mpn.model;
 import br.edu.sr.ifes.mpn.model.*;
 
 rule "PacienteNaoDoadorTime"
+	salience 10
 	when 
 	 	$n: Notificacao($o: Obito)
 	 	$n1: Notificacao(this == $n, getDelayTime() > 21600000)
@@ -13,6 +14,7 @@ rule "PacienteNaoDoadorTime"
 end
 
 rule "PacienteNaoDoadorDoenca"
+	salience 9
 	when 
 	 	$n: Notificacao($o: Obito)
 	 	$o1: Obito(this == $o, $c: CausaMortis)
@@ -24,6 +26,7 @@ rule "PacienteNaoDoadorDoenca"
 end
 
 rule "PacienteDoador"
+	salience 8
 	when 
 	 	$n: Notificacao()
 	then
@@ -87,3 +90,4 @@ rule "Obito em Vitoria"
 	 	$i.addItenInThelist($c);
 	 	update($i);
 end
+

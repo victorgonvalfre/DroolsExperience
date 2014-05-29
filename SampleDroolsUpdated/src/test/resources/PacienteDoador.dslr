@@ -1,0 +1,15 @@
+package br.edu.sr.ifes.mpn.model;
+import br.edu.sr.ifes.mpn.model.*;
+
+expander PacienteDoador.dsl
+rule "PacienteDoador"
+	when 
+	 	Validar notificacao
+	 	Checkar time 21600000
+	 	Examinar obito
+	 	Verificar morte por doenca
+	then
+		Display msgNotificacaoRestanten
+		Cria entrevista
+		Agenda entrevista
+end

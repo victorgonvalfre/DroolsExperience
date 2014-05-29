@@ -1,0 +1,14 @@
+package br.edu.sr.ifes.mpn.model;
+import br.edu.sr.ifes.mpn.model.*;
+
+expander DoacaoAceita.dsl
+rule "Doacao Aceita"
+	when 
+	 	Validar notificacao
+	 	Verificar se Doacao foi aceita 
+	 	Checkar time 21600000
+	then
+		Display msgDoacaoTempoEsgotado
+		Criar Captacao
+		Inserir Captacao
+end
