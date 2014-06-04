@@ -1,7 +1,6 @@
-[condition][]Validar notificacao =$n : Notificacao($o: Obito)
-[condition][]Verifica se Doacao foi negada =$d: Doacao($o2: Obito,  autorizado == false)
-[condition][]Confirma relacao de Notificacao e Obito = $o3: Obito(this == $o, $o3 == $o2)
+[condition][]Verificar notificacao ativa =$n : Notificacao($o: Obito)
+[condition][]e se Doacao foi negada =$d: Doacao($o2: Obito,  autorizado == false)
 
-[consequence][]Display msgDoacaoNegada= System.out.println("---> Doação Negada! "+ $d.getMotivoRecusa());
-[consequence][]Deleta Doacao = retract($d)
-[consequence][]Deleta Notificacao = retract($n) 
+[consequence][]Display mensagem de recusa de doacao= System.out.println("---> Doação Negada! "+ $d.getMotivoRecusa());
+[consequence][]Retira a Doacao = retract($d)
+[consequence][]e a Notificacao do processo = retract($n) 

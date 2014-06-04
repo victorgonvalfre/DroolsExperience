@@ -4,11 +4,8 @@ import br.edu.sr.ifes.mpn.model.*;
 expander DoacaoAceitaTempoEsgotado.dsl
 rule "DoacaoAceitaMasOTempoEstourou "
 	when 
-	 	Validar notificacao
-	 	Verificar se Doacao foi aceita 
-	 	Checkar timer esgotado 21600000
+		Verificar notificacao ativa e se Doacao foi aceita mas estourou o tempo limite de  21600000
 	then
-		Display msgDoacaoTempoEsgotado
-		Deleta Doacao
-		Deleta Notificacao
+		Display mensagem de tempo esgotado 
+		Retira Doacao e Notificacao do processo
 end

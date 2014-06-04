@@ -4,12 +4,9 @@ import br.edu.sr.ifes.mpn.model.*;
 expander PacienteDoador.dsl
 rule "PacienteDoador"
 	when 
-	 	Validar notificacao
-	 	Checkar time 21600000
-	 	Examinar obito
-	 	Verificar morte por doenca
+	 	Verificar notificacao ativa e validar se o tempo do processo nao atingiu o limite de 21600000
+		Examinar se obito não foi causado por doenca
 	then
-		Display msgNotificacaoRestanten
-		Cria entrevista
-		Agenda entrevista
+		Display mensagem de aceite de paciente
+		Criar e Agendar entrevista
 end

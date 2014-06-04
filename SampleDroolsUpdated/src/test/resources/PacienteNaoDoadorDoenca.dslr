@@ -4,10 +4,9 @@ import br.edu.sr.ifes.mpn.model.*;
 expander PacienteNaoDoadorDoenca.dsl
 rule "PacienteNaoDoadorDoenca"
 	when 
-	 	Validar notificacao
-	 	Examinar obito
-	 	Verificar morte por doenca
+	 	Verificar notificacao ativa
+	 	Examinar se obito foi causado por doenca
 	then
-		Display msgDoenca
-		Retira Notificacao
+		Display paciente com doenca
+		Retira Notificacao do processo
 end

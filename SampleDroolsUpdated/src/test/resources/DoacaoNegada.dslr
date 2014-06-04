@@ -4,11 +4,8 @@ import br.edu.sr.ifes.mpn.model.*;
 expander DoacaoNegada.dsl
 rule "Doacao Negada"
 	when 
-	 	Validar notificacao
-	 	Verifica se Doacao foi negada
-	 	Confirma relacao de Notificacao e Obito
+	Verificar notificacao ativa e se Doacao foi negada
 	then
-		Display msgDoacaoNegada
-		Deleta Doacao
-		Deleta Notificacao
+		Display mensagem de recusa de doacao
+		Retira a Doacao e a Notificacao do processo
 end

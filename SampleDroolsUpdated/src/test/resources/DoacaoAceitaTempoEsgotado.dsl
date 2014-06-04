@@ -1,7 +1,7 @@
-[condition][]Validar notificacao =$n : Notificacao($o: Obito)
-[condition][]Verificar se Doacao foi aceita =$d: Doacao(obito == $o, autorizado == true)
-[condition][]Checkar timer esgotado {timeStamp}=$d1: Doacao(this == $d, getDelayTime() > {timeStamp})
+[condition][]Verificar notificacao ativa =$n : Notificacao($o: Obito)
+[condition][]e se Doacao foi aceita =$d: Doacao(obito == $o, autorizado == true)
+[condition][]mas estourou o tempo limite de {timeStamp}=$d1: Doacao(this == $d, getDelayTime() > {timeStamp})
 
-[consequence][]Display msgDoacaoTempoEsgotado=System.out.println("---> Doação Aceita, mas o tempo para o processo já está no limite! Paciente Invalido!");
-[consequence][]Deleta Doacao = retract($d);
-[consequence][]Deleta Notificacao = retract($n);
+[consequence][]Display mensagem de tempo esgotado =System.out.println("---> Doação Aceita, mas o tempo para o processo já está no limite! Paciente Invalido!");
+[consequence][]Retira Doacao = retract($d);
+[consequence][]e Notificacao do processo= retract($n);

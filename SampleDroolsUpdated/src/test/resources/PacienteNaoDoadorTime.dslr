@@ -4,9 +4,8 @@ import br.edu.sr.ifes.mpn.model.*;
 expander PacienteNaoDoadorTime.dsl
 rule "PacienteNaoDoadorTime"
 	when 
-	 	Validar notificacao
-	 	Checkar time 21600000
+	 	Verificar notificacao ativa e checar se o tempo do processo não ultrapassou o limite de 21600000
 	then
-		Display msg
-		Retira Notificacao
+		Display estouro de tempo do processo
+		Retira Notificacao do processo
 end
