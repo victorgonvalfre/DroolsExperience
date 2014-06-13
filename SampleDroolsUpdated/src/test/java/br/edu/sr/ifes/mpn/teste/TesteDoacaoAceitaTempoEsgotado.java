@@ -39,30 +39,33 @@ public class TesteDoacaoAceitaTempoEsgotado {
     	causaMortis.setTipoMorte(TipoMorte.Outros);
     	causaMortis.setDescricao("Batida de Carro");
     	
+    	//Setor
+    	Setor setor = new Setor();
+    	setor.setNome("Vitoria");
+    	
     	//Criando Obito
     	Obito obito = new Obito();
     	obito.setDataObito(cal.getTime());
-    	obito.setLocalMorte(LocalMorte.Vitoria);
+    	obito.setSetor(setor);
     	obito.setCausaMortis(causaMortis);
-    	
+ 	
     	//Criando Doacao
-    	Doacao doacao = new Doacao(true, null, obito, true);
+    	Doacao doacao = new Doacao(true, obito, true);
     	
     	//Criando Notificao
-        Notificacao notificaco = new Notificacao();
+        ProcessoNotificacao notificaco = new ProcessoNotificacao();
         notificaco.setCodigo("codigo2");
-        notificaco.setDataNotificacao(dateAux);
+        notificaco.setArquivado(false);
+        notificaco.setDataAbertura(dateAux);
         notificaco.setObito(obito);
         
 	 	Instituicao instituicao1 = new Instituicao();
 	 	instituicao1.setNome("Jayme");
 	 	//instituicao1.setLstCaptacoesRelizadas(new ArrayList<Captacao>());
-	 	instituicao1.setSigla("vix");
         
 	 	Instituicao instituicao2 = new Instituicao();
 	 	instituicao2.setNome("Outros");
-	 	//instituicao2.setLstCaptacoesRelizadas(new ArrayList<Captacao>());
-	 	instituicao2.setSigla("out");        
+	 	//instituicao2.setLstCaptacoesRelizadas(new ArrayList<Captacao>());    
         
 		//Adiciono a objeto na sessao
 	 	ruleEngine.addObject(instituicao1);

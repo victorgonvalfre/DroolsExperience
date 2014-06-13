@@ -4,8 +4,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Captacao {
-	private boolean realizada;
+	private boolean coorneadCaptadas;
+	private boolean equipeDisponivel;
 	private Doacao doacao;
+	private Pessoa analista;
+	private Pessoa captador;
 	private Date dataEntradaCaptacao;
 	private long delayTime;
 	
@@ -36,25 +39,56 @@ public class Captacao {
        	
 		this.dataEntradaCaptacao = dateAux;
 	}
-	public boolean isRealizada() {
-		return realizada;
-	}
-	public void setRealizada(boolean realizada) {
-		this.realizada = realizada;
-	}
+
 	public Doacao getDoacao() {
 		return doacao;
 	}
 	public void setDoacao(Doacao doacao) {
 		this.doacao = doacao;
 	}
-	@Override
-	public String toString() {
-		return "Captacao [realizada=" + realizada + ", doacao=" + doacao + "]";
-	}
-	
-	public Captacao(){
-		
+
+	public boolean isCoorneadCaptadas() {
+		return coorneadCaptadas;
 	}
 
+	public void setCoorneadCaptadas(boolean coorneadCaptadas) {
+		this.coorneadCaptadas = coorneadCaptadas;
+	}
+
+	public boolean isEquipeDisponivel() {
+		return equipeDisponivel;
+	}
+
+	public void setEquipeDisponivel(boolean equipeDisponivel) {
+		this.equipeDisponivel = equipeDisponivel;
+	}
+
+	public Pessoa getAnalista() {
+		return analista;
+	}
+
+	public void setAnalista(Pessoa analista) {
+		this.analista = analista;
+	}
+
+	public Pessoa getCaptador() {
+		return captador;
+	}
+
+	public void setCaptador(Pessoa captador) {
+		this.captador = captador;
+	}
+
+	public void setDataEntradaCaptacao(Date dataEntradaCaptacao) {
+		this.dataEntradaCaptacao = dataEntradaCaptacao;
+	}
+
+	@Override
+	public String toString() {
+		return "Captacao [coorneadCaptadas=" + coorneadCaptadas
+				+ ", equipeDisponivel=" + equipeDisponivel
+				+ ", dataEntradaCaptacao=" + dataEntradaCaptacao + "]";
+	}
+
+	
 }

@@ -5,23 +5,21 @@ import java.util.Date;
 
 public class Doacao {
 	private boolean autorizado;
-	private MotivoRecusa motivoRecusa;
 	private Testemunha testemunha;
-	private ResponsavelLegal responsavelLegal;
+	private Responsavel responsavelLegal;
+	
 	private Obito obito;
 	private Date dataEntradaDoacao;
 	private long delayTime;
-	
-	public Doacao(boolean auth, MotivoRecusa motivo, Obito obito){
+		
+	public Doacao(boolean auth, Obito obito){
 		this.autorizado = auth;
-		this.motivoRecusa = motivo;
 		this.obito = obito;
 		this.setDataEntradaDoacao();
 	}
 	
-	public Doacao(boolean auth, MotivoRecusa motivo, Obito obito, boolean tempoEstourado){
+	public Doacao(boolean auth, Obito obito, boolean tempoEstourado){
 		this.autorizado = auth;
-		this.motivoRecusa = motivo;
 		this.obito = obito;
 		if(tempoEstourado == true){
 			this.setDataEntradaDoacaoEstourado();
@@ -71,33 +69,22 @@ public class Doacao {
 	public void setAutorizado(boolean autorizado) {
 		this.autorizado = autorizado;
 	}
-	public MotivoRecusa getMotivoRecusa() {
-		return motivoRecusa;
-	}
-	public void setMotivoRecusa(MotivoRecusa motivoRecusa) {
-		this.motivoRecusa = motivoRecusa;
-	}
 	public Testemunha getTestemunha() {
 		return testemunha;
 	}
 	public void setTestemunha(Testemunha testemunha) {
 		this.testemunha = testemunha;
 	}
-	public ResponsavelLegal getResponsavelLegal() {
+	public Responsavel getResponsavelLegal() {
 		return responsavelLegal;
 	}
-	public void setResponsavelLegal(ResponsavelLegal responsavelLegal) {
+	public void setResponsavelLegal(Responsavel responsavelLegal) {
 		this.responsavelLegal = responsavelLegal;
 	}
 	
 	@Override
 	public String toString() {
-		return "Doacao [autorizado=" + autorizado + ", motivoRecusa="
-				+ motivoRecusa + ", testemunha=" + testemunha
+		return "Doacao [autorizado=" + autorizado + ", testemunha=" + testemunha
 				+ ", responsavelLegal=" + responsavelLegal + "]";
-	}
-	
-	public Doacao(){
-		
 	}
 }

@@ -4,7 +4,7 @@ import br.edu.sr.ifes.mpn.model.*;
 expander PacienteDoador.dsl
 rule "PacienteDoador"
 	when 
-	 	Verificar notificacao ativa e validar se o tempo do processo nao atingiu o limite de 21600000
+	 	Verificar notificacao ativa e validar se o tempo do processo nao atingiu o limite de 6 horas
 		Examinar se obito não foi causado por doenca
 	then
 		Display mensagem de aceite de paciente

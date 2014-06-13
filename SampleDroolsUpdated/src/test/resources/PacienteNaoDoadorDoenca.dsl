@@ -1,4 +1,4 @@
-[condition][]Verificar notificacao ativa =$n : Notificacao($o: Obito)
+[condition][]Verificar notificacao ativa e =$n : ProcessoNotificacao($o: Obito, arquivado == false)
 [condition][]Examinar se obito = $o1: Obito(this == $o, $c: CausaMortis)
 [condition][]foi causado por doenca= $c1: CausaMortis(this == $c, tipoMorte == TipoMorte.DoencaContagiosa)
 

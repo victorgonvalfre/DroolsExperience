@@ -1,43 +1,29 @@
 package br.edu.sr.ifes.mpn.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Instituicao {
+	private long id;
 	private String nome;
-	private String fantasia;
-	private String sigla;
+	private String cnes;
 	private String email;
-	private List<Captacao> lstCaptacoesRelizadas = new ArrayList<Captacao>();
+	private String fantasia;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
-	}
-	public List<Captacao> getLstCaptacoesRelizadas() {
-		return lstCaptacoesRelizadas;
-	}
-	
-	public void addItenInThelist(Captacao captacao){
-		this.lstCaptacoesRelizadas.add(captacao);
-	}
-	
-	public void setLstCaptacoesRelizadas(List<Captacao> lstCaptacoesRelizadas) {
-		this.lstCaptacoesRelizadas = lstCaptacoesRelizadas;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getFantasia() {
-		return fantasia;
+	public String getCnes() {
+		return cnes;
 	}
-	public void setFantasia(String fantasia) {
-		this.fantasia = fantasia;
-	}
-	public String getSigla() {
-		return sigla;
-	}
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setCnes(String cnes) {
+		this.cnes = cnes;
 	}
 	public String getEmail() {
 		return email;
@@ -45,5 +31,17 @@ public class Instituicao {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public String getFantasia() {
+		return fantasia;
+	}
+	public void setFantasia(String fantasia) {
+		this.fantasia = fantasia;
+	}
+	
+	@Override
+	public String toString() {
+		return "Instituicao [id=" + id + ", nome=" + nome + "]";
+	}
+	
+	
 }

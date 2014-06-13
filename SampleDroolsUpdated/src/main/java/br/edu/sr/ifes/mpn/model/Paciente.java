@@ -1,32 +1,21 @@
 package br.edu.sr.ifes.mpn.model;
 
 import java.util.Date;
-
-import br.edu.sr.ifes.mpn.util.EstadoCivil;
-import br.edu.sr.ifes.mpn.util.Sexo;
 import br.edu.sr.ifes.mpn.util.TipoPaciente;
 
-public class Paciente {
-	
-	private Pessoa pessoa;
+public class Paciente extends Pessoa{
 	private Date dataInternacao;
 	private Date dataNascimento;
 	private String profissao;
-	private String nomePai;
 	private String nomeMae;
 	private String numeroProntuario;
-	private String documentoSocial;
+	private String numeroSUS;
 	private String nacionalidade;
-	private EstadoCivil estadoCivil;
+	private String documentoSocial;
 	private TipoPaciente tipoPaciente;
-	private Sexo sexo;
+	private Responsavel responsavel;
 	
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
+	
 	public Date getDataInternacao() {
 		return dataInternacao;
 	}
@@ -45,12 +34,6 @@ public class Paciente {
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
 	}
-	public String getNomePai() {
-		return nomePai;
-	}
-	public void setNomePai(String nomePai) {
-		this.nomePai = nomePai;
-	}
 	public String getNomeMae() {
 		return nomeMae;
 	}
@@ -63,11 +46,11 @@ public class Paciente {
 	public void setNumeroProntuario(String numeroProntuario) {
 		this.numeroProntuario = numeroProntuario;
 	}
-	public String getDocumentoSocial() {
-		return documentoSocial;
+	public String getNumeroSUS() {
+		return numeroSUS;
 	}
-	public void setDocumentoSocial(String documentoSocial) {
-		this.documentoSocial = documentoSocial;
+	public void setNumeroSUS(String numeroSUS) {
+		this.numeroSUS = numeroSUS;
 	}
 	public String getNacionalidade() {
 		return nacionalidade;
@@ -75,11 +58,11 @@ public class Paciente {
 	public void setNacionalidade(String nacionalidade) {
 		this.nacionalidade = nacionalidade;
 	}
-	public EstadoCivil getEstadoCivil() {
-		return estadoCivil;
+	public String getDocumentoSocial() {
+		return documentoSocial;
 	}
-	public void setEstadoCivil(EstadoCivil estadoCivil) {
-		this.estadoCivil = estadoCivil;
+	public void setDocumentoSocial(String documentoSocial) {
+		this.documentoSocial = documentoSocial;
 	}
 	public TipoPaciente getTipoPaciente() {
 		return tipoPaciente;
@@ -87,25 +70,18 @@ public class Paciente {
 	public void setTipoPaciente(TipoPaciente tipoPaciente) {
 		this.tipoPaciente = tipoPaciente;
 	}
-	public Sexo getSexo() {
-		return sexo;
+	public Responsavel getResponsavel() {
+		return responsavel;
 	}
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
+	public void setResponsavel(Responsavel responsavel) {
+		this.responsavel = responsavel;
 	}
 	
 	@Override
 	public String toString() {
-		return "Paciente [dataInternacao=" + dataInternacao
-				+ ", dataNascimento=" + dataNascimento + ", profissao="
-				+ profissao + ", nomePai=" + nomePai + ", nomeMae=" + nomeMae
-				+ ", numeroProntuario=" + numeroProntuario
-				+ ", documentoSocial=" + documentoSocial + ", nacionalidade="
-				+ nacionalidade + ", estadoCivil=" + estadoCivil
-				+ ", tipoPaciente=" + tipoPaciente + ", sexo=" + sexo + "]";
-	}
-	
-	public Paciente(){
-		
+		return "Paciente [dataInternacao=" + dataInternacao + ", nomeMae="
+				+ nomeMae + ", numeroProntuario=" + numeroProntuario
+				+ ", numeroSUS=" + numeroSUS + ", documentoSocial="
+				+ documentoSocial + "]";
 	}
 }

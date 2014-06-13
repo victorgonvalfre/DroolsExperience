@@ -2,64 +2,72 @@ package br.edu.sr.ifes.mpn.model;
 
 import java.util.Date;
 
-import br.edu.sr.ifes.mpn.util.Encaminhado;
-import br.edu.sr.ifes.mpn.util.LocalMorte;
+import br.edu.sr.ifes.mpn.util.TipoMorte;
 
 public class Obito {
 	private Date dataObito;
+	private Date dataEvento;
+	private boolean aptoDoacao;
 	private Paciente paciente;
-	private ResponsavelLegal responsavelLegal;
 	private CausaMortis causaMortis;
-	private Encaminhado encaminhado;
-	private LocalMorte localMorte;
+	private Setor setor;
 	
-	public LocalMorte getLocalMorte() {
-		return localMorte;
-	}
-	public void setLocalMorte(LocalMorte localMorte) {
-		this.localMorte = localMorte;
-	}
 	public Date getDataObito() {
 		return dataObito;
 	}
+
 	public void setDataObito(Date dataObito) {
 		this.dataObito = dataObito;
 	}
+
+	public Date getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(Date dataEvento) {
+		this.dataEvento = dataEvento;
+	}
+
+	public boolean isAptoDoacao() {
+		if(this.causaMortis.getTipoMorte().equals(TipoMorte.Outros)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public void setAptoDoacao(boolean aptoDoacao) {
+		this.aptoDoacao = aptoDoacao;
+	}
+
 	public Paciente getPaciente() {
 		return paciente;
 	}
+
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-	
-	public ResponsavelLegal getResponsavelLegal() {
-		return responsavelLegal;
-	}
-	public void setResponsavelLegal(ResponsavelLegal responsavelLegal) {
-		this.responsavelLegal = responsavelLegal;
-	}
+
 	public CausaMortis getCausaMortis() {
 		return causaMortis;
 	}
+
 	public void setCausaMortis(CausaMortis causaMortis) {
 		this.causaMortis = causaMortis;
 	}
-	public Encaminhado getEncaminhado() {
-		return encaminhado;
+
+	public Setor getSetor() {
+		return setor;
 	}
-	public void setEncaminhado(Encaminhado encaminhado) {
-		this.encaminhado = encaminhado;
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Obito [dataObito=" + dataObito + ", paciente=" + paciente
-				+ ", causaMortis=" + causaMortis + ", encaminhado="
-				+ encaminhado + "]";
+		return "Obito [dataObito=" + dataObito + ", dataEvento=" + dataEvento
+				+ ", aptoDoacao=" + aptoDoacao + "]";
 	}
-	
-	public Obito(){
-		
-	}
-	
 }

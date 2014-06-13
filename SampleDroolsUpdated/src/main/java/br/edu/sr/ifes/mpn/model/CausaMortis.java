@@ -27,8 +27,4 @@ public class CausaMortis {
 	public String toString() {
 		return "CausaMortis [descricao=" + descricao + "]";
 	}
-	
-	public CausaMortis(){
-		
-	}
 }

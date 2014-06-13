@@ -4,7 +4,8 @@ import br.edu.sr.ifes.mpn.model.*;
 expander DoacaoAceita.dsl
 rule "Doacao Aceita"
 	when 
-	 	Verificar notificacao ativa e se Doacao foi aceita em um tempo limite de 21600000
+		Verificar notificacao ativa com paciente apto para doacao e se Doacao foi aceita em um tempo limite de 6 horas
+
 	then
 		Display mensagem de sucesso 
 		Criar e Inserir uma Captacao

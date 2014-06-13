@@ -3,8 +3,7 @@ package br.edu.sr.ifes.mpn.model;
 public class Pessoa {
 
 	private String nome;
-	private String rg;
-	private String cpf;
+	private Endereco endereco;
 	
 	public String getNome() {
 		return nome;
@@ -12,26 +11,17 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getRg() {
-		return rg;
+	
+	public Endereco getEndereco() {
+		return endereco;
 	}
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	@Override
 	public String toString() {
-		return "Pessoa [nome=" + nome + ", rg=" + rg + ", cpf=" + cpf + "]";
-	}
-	
-	public Pessoa (){
-		
+		return "Pessoa [nome=" + nome + "]";
 	}
 	
 }
